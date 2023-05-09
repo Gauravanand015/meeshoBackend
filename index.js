@@ -20,6 +20,10 @@ app.use(fileUpload({
     useTempFiles:true
 }))
 
+app.get("/",(req,res)=>{
+    res.send("Home Page");
+})
+
 
 app.use("/home",homeRouter)
 app.use("/productDescription",description_route)
