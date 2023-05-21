@@ -63,6 +63,22 @@ cartRouter.delete("/deleteItemfromCart/:product_id",validateUser,authorise(["adm
         console.log(error)
     }
 })
+
+cartRouter.delete("/deleteAllItemFromCart",validateUser,authorise(["admin","user"]),async(req,res)=>{
+    console.log(req.body)
+    try {
+        const userID = req.body.userID; // Assuming you have the userID available in the request body
+    
+        // Delete all items from the cart for the specified user ID
+        await CartModel.deleteMany({ userID });
+    
+        res.json({ message: "All items deleted from the cart" });
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Something went wrong" });
+      }
+})
+
 module.exports={
     cartRouter
 }
